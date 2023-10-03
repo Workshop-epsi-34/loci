@@ -1,0 +1,62 @@
+*,
+html {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #fcfcfc;
+}
+
+ul {
+  padding-left: 0;
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+
+/*Typographie*/
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.3;
+  color: black;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 24px;
+  font-weight: 600;
+  color: black;
+}
+
+
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#sidebar {
+    width: 30%;
+    height: 100%;
+    background-color: #ccc;
+    float: left;
+    transition: width 1s;
+}
+
+#main {
+    width: 70%;
+    height: 100%;
+    background-color: #eee;
+    float: left;
+}
+

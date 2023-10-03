@@ -15,7 +15,7 @@ fetch("https://loci.directus.app/items/productor")
     }
   });
 
-fetch("https://loci.directus.app/items/product_name")
+fetch("https://loci.directus.app/items/product")
   .then((response) => response.json())
   .then((data) => {
     for (let i = 0; i < data["data"].length; i++) {
@@ -24,6 +24,12 @@ fetch("https://loci.directus.app/items/product_name")
       content2.insertAdjacentHTML("afterbegin", p.outerHTML);
     }
   });
+
+
+
+function background1(){
+    
+}
 
 // Effect slide to left
 

@@ -37,26 +37,31 @@ h6 {
   color: black;
 }
 
-
-body, html {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+body,
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 #sidebar {
-    width: 30%;
-    height: 100%;
-    background-color: #ccc;
-    float: left;
-    transition: width 1s;
+  width: 30%;
+  height: 100%;
+  background-color: #eee;
+  float: left;
+  transition: width 1s;
 }
 
 #main {
-    width: 70%;
-    height: 100%;
-    background-color: #eee;
-    float: left;
+  width: 70%;
+  height: 100%;
+  background-image: url("./images/map.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  float: left;
 }
 
+.card {
+  background-color: #eee !important;
+  border: none !important;
+}

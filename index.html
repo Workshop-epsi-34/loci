@@ -69,25 +69,54 @@
             <li class="nav-item">
               <a class="nav-link disabled" aria-disabled="true">Disabled</a>
             </li>
-          </ul>
-          <form class="d-flex" role="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
         </div>
       </div>
     </nav>
-    <section id="sidebar"></section>
-    <section id="main">
-      <h1>Loci</h1>
-      <img onClick="reduceButton()" src="./images/map.jpeg" alt="" />
+    <section class="container " id="sidebar">
+      <div class="container" style="height: inherit; margin-top:24px">
+        <div class="row" style="height: 100%">
+          <div class="card col ">
+            <div class="card-body">
+              <h5 class="card-title" style="font-size: 48px;">Card title</h5>
+              <p class="card-text" style="font-size: 16px;">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row"></div>
+    </section>
+    <section id="main" onClick="reduceButton()">
+      <div class="row justify-content-between ms-3 me-3">
+    <div class="col-4 ">
+      <nav class="navbar">
+            <form class="form-inline">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Produit</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Rechercher" aria-label="Rechercher" aria-describedby="basic-addon1">
+              </div>
+            </form>
+          </nav>
+    </div>
+    <div class="col-4 w-auto">
+      <div class="dropdown p-2 align-self-end">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Filtrer
+            </button>
+            <ul class="dropdown-menu">
+              <li><a onclick="background1()" class="dropdown-item" href="#">Action</a></li>
+              <li><a onclick="background2()" class="dropdown-item" href="#">Another action</a></li>
+              <li><a onclick="background3()" class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </div>
+
+    </div>
+  </div>
       <div id="content"></div>
       <div id="content2"></div>
     </section>

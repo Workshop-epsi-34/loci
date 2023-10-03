@@ -25,10 +25,9 @@ fetch("https://loci.directus.app/items/product")
     }
   });
 
-
-
-function background1(){
-    
+function background(newImageUrl) {
+  var mainSection = document.getElementById("main");
+  mainSection.style.backgroundImage = 'url("' + newImageUrl + '")';
 }
 
 // Effect slide to left

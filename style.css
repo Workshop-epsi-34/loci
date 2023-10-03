@@ -65,3 +65,21 @@ html {
   background-color: #eee !important;
   border: none !important;
 }
+
+#dropdown-filter img {
+  height: 16px;
+}
+
+#sidebar-content p {
+  cursor: pointer; /* Change le curseur en main lors du survol */
+  transition: background-color 0.3s; /* Ajoute une transition sur la couleur de fond */
+}
+
+#sidebar-content p:hover {
+  background-color: lightgreen; /* Change la couleur de fond en vert clair lors du survol */
+}
+
+#logo-pointer {
+  cursor: pointer; /* Change le curseur en main lors du survol */
+  
+}

@@ -25,6 +25,10 @@
     <title>Document</title>
   </head>
   <body>
+
+    <!--
+                    NAV
+    -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Loci</a>
@@ -72,52 +76,78 @@
         </div>
       </div>
     </nav>
-    <section class="container " id="sidebar">
-      <div class="container" style="height: inherit; margin-top:24px">
-        <div class="row" style="height: 100%">
-          <div class="card col ">
-            <div class="card-body">
-              <h5 class="card-title" style="font-size: 48px;">Card title</h5>
-              <p class="card-text" style="font-size: 16px;">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
+
+    <!--
+                    SIDEBAR
+    -->
+<section class="container " id="sidebar" style="height: 100vh; overflow-y: auto;">
+  <div class="container" style="height: inherit; margin-top:24px">
+    <div id="sidebar-content" class="row" style="height: 100%">
+      <div class="card col ">
+        <div class="card-body">
+          <h5 class="card-title" style="font-size: 48px;">Card title</h5>
+          <p class="card-text" style="font-size: 16px;">
+            Some quick example text to build on the card title and make up
+            the bulk of the card's content.
+          </p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
       </div>
-      <div class="row"></div>
-    </section>
-    <section id="main" onClick="reduceButton()">
-      <div class="row justify-content-between ms-3 me-3">
-    <div class="col-4 ">
-      <nav class="navbar">
-            <form class="form-inline">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">Produit</span>
-                </div>
-                <input type="text" class="form-control" placeholder="Rechercher" aria-label="Rechercher" aria-describedby="basic-addon1">
-              </div>
-            </form>
-          </nav>
-    </div>
-    <div class="col-4 w-auto">
-      <div class="dropdown p-2 align-self-end">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Filtrer
-            </button>
-            <ul class="dropdown-menu">
-              <li><a onclick="background('./images/map.jpeg')" class="dropdown-item" href="#">XXX</a></li>
-              <li><a onclick="background('./images/logo.png')" class="dropdown-item" href="#">XX</a></li>
-            </ul>
-          </div>
-
     </div>
   </div>
-      <div id="content"></div>
-      <div id="content2"></div>
-    </section>
+  <div class="row"></div>
+</section>
+
+
+    <!--
+                    MAIN
+    -->
+<section id="main" onClick="displayProductorsList()">
+  <div class="row justify-content-between ms-3 me-3">
+    <div class="col-4 ">
+      <nav class="navbar">
+        <form class="form-inline">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Produit</span>
+            </div>
+            <input type="text" class="form-control" placeholder="Rechercher" aria-label="Rechercher" aria-describedby="basic-addon1">
+          </div>
+        </form>
+      </nav>
+    </div>
+    <div class="col-4 w-auto">
+      <div class="dropdown p-2 align-self-end" id="dropdown-filter">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Filtrer
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a onclick="background('./images/map.jpeg')" class="dropdown-item" href="#">
+              <img src="./images/feuilles-loci.png" alt="">
+              <img src="./images/feuilles-loci.png" alt=""> 
+              <img src="./images/feuilles-loci.png" alt="">
+            </a>
+          </li>
+          <li>
+            <a onclick="background('./images/logo.png')" class="dropdown-item" href="#">
+              <img src="./images/feuilles-loci.png" alt=""> 
+              <img src="./images/feuilles-loci.png" alt="">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+<div></div>
+<img id="logo-pointer" src="./images/logo-loci.png" alt="" data-bs-toggle="tooltip" title="Chez Ginette" style="width: 50px; position: absolute; top: 50%; left: 50%;">
+<img id="logo-pointer" src="./images/logo-loci.png" alt="" data-bs-toggle="tooltip" title="Fraiment bon" style="width: 50px; position: absolute; top: 15%; left: 80%;">
+<img id="logo-pointer" src="./images/logo-loci.png" alt="" data-bs-toggle="tooltip" title="Végé-tables" style="width: 50px; position: absolute; top: 80%; left: 70%;">
+
+<div id="content"></div>
+<div id="content2"></div>
+
+
+</section>
   </body>
 </html>

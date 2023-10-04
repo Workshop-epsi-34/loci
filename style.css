@@ -60,7 +60,7 @@ html {
 #main {
   width: 70%;
   height: 100%;
-  background-image: url("./images/map.jpeg");
+  background-image: url("./images/map.png");
   background-size: cover;
   background-repeat: no-repeat;
   float: left;

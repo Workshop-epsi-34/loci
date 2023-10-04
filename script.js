@@ -5,10 +5,10 @@ let productorsData = [];
 let productsData = [];
 let displayProductorsListDone = false;
 
-fetch("https://loci.directus.app/items/Productor")
+fetch("https://loci.directus.app/items/Product")
   .then((response) => response.json())
   .then((data) => {
-    productorsData = data["data"];
+    productsData = data["data"];
     for (let i = 0; i < data["data"].length; i++) {
       const p = document.createElement("p");
       p.innerHTML = data["data"][i].name;
@@ -23,7 +23,7 @@ fetch("https://loci.directus.app/items/Productor")
 fetch("https://loci.directus.app/items/Productor")
   .then((response) => response.json())
   .then((data) => {
-    productsData = data["data"];
+    productorsData = data["data"];
     for (let i = 0; i < data["data"].length; i++) {
       const p = document.createElement("p");
       p.innerHTML = data["data"][i].Name;
@@ -38,6 +38,7 @@ function background(newImageUrl) {
 
 function displayProductorsList() {
   if (displayProductorsListDone == false) {
+    console.log(productorsData);
     // Faire tomber l'opacité du texte à 0 en 0.5 seconde
     getSidebarContent.style.transition = "opacity 0.5s";
     getSidebarContent.style.opacity = "0";
@@ -45,23 +46,68 @@ function displayProductorsList() {
     // Utiliser setTimeout pour attendre que la transition soit terminée avant de supprimer le contenu
     setTimeout(() => {
       getSidebarContent.innerHTML = "";
-
+      let id = 0;
       // Afficher le nouveau contenu à une opacité de 0
-      for (let i = 0; i < productsData.length; i++) {
+      for (let i = 0; i < productorsData.length; i++) {
+        id = id + 1;
         const p = document.createElement("p");
         p.style.marginBottom = "0px";
         p.style.paddingTop = "16px";
         p.style.paddingBottom = "16px";
-        p.innerHTML = productsData[i].Name;
-        getSidebarContent.insertAdjacentHTML("afterbegin", p.outerHTML);
+        p.innerHTML = productorsData[i].Name;
+
+        // Ajouter un id à chaque élément "p"
+        p.id = "product-" + id;
+
+        // Ajouter un événement click à chaque élément "p"
+        // Ajouter un événement click à chaque élément "p"
+
+        p.addEventListener("click", function () {
+          console.log(productsData);
+          for (let i = 0; i < productsData.length; i++) {
+            console.log(productsData[i].Productor[0]);
+          }
+
+          // Trouver le producteur correspondant dans productsData
+          const producteur = productorsData.find(
+            (product) => "product-" + product.Id === this.id
+          );
+
+          // Créer le contenu du popup
+          const popupContent = `
+            <button id="close-popup" style="position: absolute; right: 10px; top: 10px;">X</button>
+            <h2>${productorsData[i].Name}</h2>
+            <!-- Ajoutez ici d'autres informations sur le producteur -->
+          `;
+
+          // Créer le popup et l'ajouter au document
+          const popup = document.createElement("div");
+          popup.innerHTML = popupContent;
+          popup.style.position = "fixed";
+          popup.style.top = "50%";
+          popup.style.left = "50%";
+          popup.style.transform = "translate(-50%, -50%)";
+          popup.style.backgroundColor = "#fff";
+          popup.style.padding = "20px";
+          popup.style.borderRadius = "10px";
+          document.body.appendChild(popup);
+
+          // Ajouter un écouteur d'événements pour fermer le popup lorsque le bouton est cliqué
+          document
+            .getElementById("close-popup")
+            .addEventListener("click", function () {
+              document.body.removeChild(popup);
+            });
+        });
+
+        getSidebarContent.appendChild(p); // Utiliser appendChild au lieu de insertAdjacentHTML
 
         // Ajouter un séparateur gris après chaque producteur
         if (i < productsData.length - 1) {
-          // Ne pas ajouter de séparateur après le dernier producteur
           const hr = document.createElement("hr");
-          hr.style.borderTop = "1px solid gray"; // Définir la couleur du séparateur en gris
+          hr.style.borderTop = "1px solid gray";
           hr.style.marginBottom = "0px";
-          getSidebarContent.insertAdjacentHTML("afterbegin", hr.outerHTML);
+          getSidebarContent.appendChild(hr); // Utiliser appendChild au lieu de insertAdjacentHTML
         }
       }
 

@@ -5,7 +5,7 @@ let productorsData = [];
 let productsData = [];
 let displayProductorsListDone = false;
 
-fetch("https://loci.directus.app/items/productor")
+fetch("https://loci.directus.app/items/Productor")
   .then((response) => response.json())
   .then((data) => {
     productorsData = data["data"];
@@ -16,11 +16,11 @@ fetch("https://loci.directus.app/items/productor")
 
       console.log(data["data"]);
 
-      console.log(data["data"][i].productor);
+      console.log(data["data"][i].name);
     }
   });
 
-fetch("https://loci.directus.app/items/Product")
+fetch("https://loci.directus.app/items/Productor")
   .then((response) => response.json())
   .then((data) => {
     productsData = data["data"];
@@ -52,7 +52,7 @@ function displayProductorsList() {
         p.style.marginBottom = "0px";
         p.style.paddingTop = "16px";
         p.style.paddingBottom = "16px";
-        p.innerHTML = productsData[i].Productor;
+        p.innerHTML = productsData[i].Name;
         getSidebarContent.insertAdjacentHTML("afterbegin", p.outerHTML);
 
         // Ajouter un séparateur gris après chaque producteur

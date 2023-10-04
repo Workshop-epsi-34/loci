@@ -37,6 +37,11 @@ h6 {
   color: black;
 }
 
+h1,
+#logo-menu {
+  font-family: "cinzel";
+}
+
 body,
 html {
   height: 100%;
@@ -81,5 +86,8 @@ html {
 
 #logo-pointer {
   cursor: pointer; /* Change le curseur en main lors du survol */
-  
+}
+
+.tooltip-image {
+  height: 16px;
 }

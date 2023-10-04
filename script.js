@@ -54,6 +54,15 @@ function background(newImageUrl) {
 
 function displayProductorsList() {
   if (displayProductorsListDone == false) {
+    let supermarket = [];
+    for (let i = 0; i < productorsData.length; i++) {
+      if (productorsData[i].supermarket) {
+        supermarket.push(productorsData[i]);
+      }
+    }
+
+    console.log(supermarket);
+
     // Faire tomber l'opacité du texte à 0 en 0.5 seconde
     getSidebarContent.style.transition = "opacity 0.5s";
     getSidebarContent.style.opacity = "0";
@@ -65,11 +74,21 @@ function displayProductorsList() {
       // Afficher le nouveau contenu à une opacité de 0
       for (let i = 0; i < productorsData.length; i++) {
         id = id + 1;
+
+        let note = "";
+        for (var j = 0; j < productorsData[i].note; j++) {
+          note +=
+            "<img src='images/feuilles-loci.png' alt='description' style='height:16px' />";
+        }
+
         const p = document.createElement("p");
         p.style.marginBottom = "0px";
         p.style.paddingTop = "16px";
         p.style.paddingBottom = "16px";
-        p.innerHTML = productorsData[i].name;
+        p.innerHTML =
+          productorsData[i].name +
+          "<span style='padding-right:10px'></span> " +
+          note;
 
         // Ajouter un id à chaque élément "p"
         p.id = "product-" + id;
@@ -87,11 +106,13 @@ function displayProductorsList() {
           // console.log("productData :" + productsData);
 
           let stall = [];
+
           for (let j = 0; j < productorsData[i].stalls.length; j++) {
             console.log(productorsData[i].stalls[j].product.name);
             const p = document.createElement("p");
-            p.innerHTML = `<span style="float:right">${productorsData[i].stalls[j].price} €</span>${productorsData[i].stalls[j].product.name}`;
+            p.innerHTML = `<p><span style="float:right">${productorsData[i].stalls[j].price} €</span>${productorsData[i].stalls[j].product.name}</p>`;
             stall.push(p);
+
             // console.log(
             //   "productorData.Productor: " + productsData[j].Productor
             // );
@@ -100,12 +121,32 @@ function displayProductorsList() {
             // console.log(productsData[j].Name);
             // console.log(productsData[j].Name);
           }
+          let stallSupermarket = [];
+          console.log(supermarket[0].stalls);
+          console.log(supermarket[0].stalls.length);
+          for (let j = 0; j < supermarket[0].stalls.length; j++) {
+            const p2 = document.createElement("p");
+            console.log("supermarket[0].stalls.length");
+            console.log(supermarket[0].stalls[j].price);
+            p2.innerHTML = `<p><span style="float:right">${supermarket[0].stalls[j].price} €</span>${supermarket[0].stalls[j].product.name}</p>`;
+            stallSupermarket.push(p2);
+          }
+
+          let notePopup = "";
+          for (var j = 0; j < productorsData[i].note; j++) {
+            notePopup +=
+              "<img src='images/feuilles-loci.png' alt='description' style='height:16px' />";
+          }
 
           // Créer le contenu du popup
           const popupContent = `
             <button id="close-popup" style="position: absolute; right: 10px; top: 10px;">X</button>
+            <span>${notePopup}</span>
             <h2>${productorsData[i].name}</h2>
-            <h2>${stall.map((x) => x.outerHTML).join("")}</h2>
+            <p>${stall.map((x) => x.outerHTML).join("")}</p>
+            <img src='images/feuilles-loci.png' alt='description' style='height:16px' />
+            <h2>${supermarket[0].name}</h2>
+            <p>${stallSupermarket.map((x) => x.outerHTML).join("")}</p>
 
 
             
@@ -124,6 +165,8 @@ function displayProductorsList() {
           popup.style.padding = "20px";
           popup.style.borderRadius = "10px";
           popup.style.zIndex = "9999";
+          popup.style.boxShadow =
+            "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px";
           document.body.appendChild(popup);
 
           // Ajouter un écouteur d'événements pour fermer le popup lorsque le bouton est cliqué
@@ -169,26 +212,22 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 // Fonction pour générer la carte et placer des marqueurs
 function generateMap() {
   // Création de la carte
-  var map = L.map("map").setView([43.6555, 3.8591], 13); // Centre la carte sur Paris
+  var map = L.map("map").setView([43.6555, 3.8591], 12); // Centre la carte sur Paris
 
   // Ajout d'une couche de tuiles (fond de carte)
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   }).addTo(map);
 
   // Tableau de données avec les coordonnées et les noms des marqueurs
-
-  var markersData = [
-    // { lat: 48.8566, lng: 2.3522, name: "Paris" },
-    // { lat: 48.86, lng: 2.327, name: "Musée du Louvre" },
-    // ... Ajoutez d'autres marqueurs ici
-  ];
+  var markersData = [];
   for (let i = 0; i < productorsData.length; i++) {
     markersData.push({
       lat: productorsData[i].location.coordinates[1],
       lng: productorsData[i].location.coordinates[0],
       name: productorsData[i].name,
+      note: productorsData[i].note,
     });
   }
 
@@ -204,6 +243,22 @@ function generateMap() {
     var marker = L.marker([markersData[i].lat, markersData[i].lng], {
       icon: customIcon,
     }).addTo(map);
-    marker.bindTooltip(markersData[i].name, { permanent: false }); // Affiche le nom au survol
+
+    // Créer le contenu du tooltip
+    var tooltipContent = "";
+
+    // Ajouter l'image au contenu du tooltip le nombre de fois souhaité
+    for (var j = 0; j < productorsData[i].note; j++) {
+      tooltipContent +=
+        "<img src='images/feuilles-loci.png' alt='description' style='height:16px' />";
+    }
+
+    tooltipContent += "</br>" + markersData[i].name;
+
+    marker.bindTooltip(tooltipContent, {
+      permanent: false,
+      direction: "top",
+      offset: [0, -20],
+    }); // Affiche le nom au survol
   }
 }

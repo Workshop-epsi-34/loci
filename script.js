@@ -36,7 +36,6 @@ fetch("https://loci.directus.app/items/Flo_Productor?fields=*.*.*")
   .then((response) => response.json())
   .then((data) => {
     productorsData = data["data"];
-    console.log(productorsData);
 
     // Appel de la fonction pour générer la carte
     generateMap();
@@ -61,7 +60,12 @@ function displayProductorsList() {
       }
     }
 
-    console.log(supermarket);
+    let advisedProductor = [];
+    for (let i = 0; i < productorsData.length; i++) {
+      if (productorsData[i].id == "1") {
+        advisedProductor.push(productorsData[i]);
+      }
+    }
 
     // Faire tomber l'opacité du texte à 0 en 0.5 seconde
     getSidebarContent.style.transition = "opacity 0.5s";
@@ -106,12 +110,17 @@ function displayProductorsList() {
           // console.log("productData :" + productsData);
 
           let stall = [];
+          let stallGege = [];
 
           for (let j = 0; j < productorsData[i].stalls.length; j++) {
-            console.log(productorsData[i].stalls[j].product.name);
             const p = document.createElement("p");
-            p.innerHTML = `<p><span style="float:right">${productorsData[i].stalls[j].price} €</span>${productorsData[i].stalls[j].product.name}</p>`;
+            p.innerHTML = `<span style="float:right">${productorsData[i].stalls[j].price} €</span>${productorsData[i].stalls[j].product.name}`;
             stall.push(p);
+            // if (productorsData[i].id == "1") {
+            //   const pGege = document.createElement("p");
+            //   pGege.innerHTML = `<span style="float:right">${productorsData[i].stalls[j].price} €</span>${productorsData[i].stalls[j].product.name}`;
+            //   stallGege.push(pGege);
+            // }
 
             // console.log(
             //   "productorData.Productor: " + productsData[j].Productor
@@ -121,13 +130,19 @@ function displayProductorsList() {
             // console.log(productsData[j].Name);
             // console.log(productsData[j].Name);
           }
+
+          let stallAdvisedProductor = [];
+          console.log(advisedProductor[0]);
+          for (let j = 0; j < advisedProductor[0].stalls.length; j++) {
+            let p3 = document.createElement("p");
+            p3.innerHTML = `<span style="float:right">${advisedProductor[0].stalls[j].price} €</span>${advisedProductor[0].stalls[j].product.name}`;
+            stallAdvisedProductor.push(p3);
+          }
+          console.log(stallAdvisedProductor);
+
           let stallSupermarket = [];
-          console.log(supermarket[0].stalls);
-          console.log(supermarket[0].stalls.length);
           for (let j = 0; j < supermarket[0].stalls.length; j++) {
             const p2 = document.createElement("p");
-            console.log("supermarket[0].stalls.length");
-            console.log(supermarket[0].stalls[j].price);
             p2.innerHTML = `<p><span style="float:right">${supermarket[0].stalls[j].price} €</span>${supermarket[0].stalls[j].product.name}</p>`;
             stallSupermarket.push(p2);
           }
@@ -138,8 +153,23 @@ function displayProductorsList() {
               "<img src='images/feuilles-loci.png' alt='description' style='height:16px' />";
           }
 
+          let popupContent = "";
+
           // Créer le contenu du popup
-          const popupContent = `
+          if (productorsData[i].id == "2") {
+            popupContent = `
+            <button id="close-popup" style="position: absolute; right: 10px; top: 10px;">X</button>
+            <span>${notePopup}</span>
+            <h2>${productorsData[i].name}</h2>
+            <p>${stall.map((x) => x.outerHTML).join("")}</p>
+            <img src='images/feuilles-loci.png' alt='description' style='height:16px' /><img src='images/feuilles-loci.png' alt='description' style='height:16px' />
+            <h2>${advisedProductor[0].name}</h2>
+            <p>${stallAdvisedProductor.map((x) => x.outerHTML).join("")}</p>
+            
+
+          `;
+          } else {
+            popupContent = `
             <button id="close-popup" style="position: absolute; right: 10px; top: 10px;">X</button>
             <span>${notePopup}</span>
             <h2>${productorsData[i].name}</h2>
@@ -147,11 +177,8 @@ function displayProductorsList() {
             <img src='images/feuilles-loci.png' alt='description' style='height:16px' />
             <h2>${supermarket[0].name}</h2>
             <p>${stallSupermarket.map((x) => x.outerHTML).join("")}</p>
-
-
-            
-            <!-- Ajoutez ici d'autres informations sur le producteur -->
           `;
+          }
 
           // Créer le popup et l'ajouter au document
           const popup = document.createElement("div");

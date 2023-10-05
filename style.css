@@ -91,3 +91,15 @@ html {
 .tooltip-image {
   height: 16px;
 }
+
+.btn-green {
+  background-color: green; /* Définissez la couleur verte de votre choix */
+  color: white; /* Changez ici la couleur du texte en blanc, ou toute autre couleur souhaitée */
+  /* Ajoutez d'autres styles si nécessaire */
+}
+
+.btn-green :hover {
+  background-color: green; /* Définissez la couleur verte de votre choix */
+  color: white; /* Changez ici la couleur du texte en blanc, ou toute autre couleur souhaitée */
+  /* Ajoutez d'autres styles si nécessaire */
+}

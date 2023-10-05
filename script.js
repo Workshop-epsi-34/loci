@@ -210,7 +210,7 @@ function displayProductorsList() {
         getSidebarContent.appendChild(p); // Utiliser appendChild au lieu de insertAdjacentHTML
 
         // Ajouter un séparateur gris après chaque producteur
-        if (i < productsData.length - 1) {
+        if (i < productorsData.length - 1) {
           const hr = document.createElement("hr");
           hr.style.borderTop = "1px solid gray";
           hr.style.marginBottom = "0px";

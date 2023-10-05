@@ -162,7 +162,9 @@ function displayProductorsList() {
             <span>${notePopup}</span>
             <h2>${productorsData[i].name}</h2>
             <p>${stall.map((x) => x.outerHTML).join("")}</p>
+            <hr style="border:1px solid grey">
             <img src='images/feuilles-loci.png' alt='description' style='height:16px' /><img src='images/feuilles-loci.png' alt='description' style='height:16px' />
+            <span style="color:green; float:right">Conseillé</span>
             <h2>${advisedProductor[0].name}</h2>
             <p>${stallAdvisedProductor.map((x) => x.outerHTML).join("")}</p>
             
@@ -174,6 +176,7 @@ function displayProductorsList() {
             <span>${notePopup}</span>
             <h2>${productorsData[i].name}</h2>
             <p>${stall.map((x) => x.outerHTML).join("")}</p>
+            <hr style="border:1px solid grey">
             <img src='images/feuilles-loci.png' alt='description' style='height:16px' />
             <h2>${supermarket[0].name}</h2>
             <p>${stallSupermarket.map((x) => x.outerHTML).join("")}</p>
